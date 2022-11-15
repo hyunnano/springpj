@@ -3,6 +3,7 @@ package net.ict.springex.mapper;
 import lombok.extern.log4j.Log4j2;
 import net.ict.springex.domain.TodoVO;
 import net.ict.springex.mapper.TodoMapper;
+import net.ict.springex.service.TodoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,6 @@ public class TodoMapperTest {
         List<TodoVO> voList = todoMapper.selectAll();
         voList.forEach(vo -> log.info(vo));
     }
+
 
 }

@@ -48,9 +48,6 @@
                     </div>
                     <div class="card-body">
                         <form action="/todo/modify" method="post">
-
-
-
                             <div class="input-group mb-3">
                                 <span class="input-group-text">TNO</span>
                                 <input type="text" name="tno" class="form-control"
@@ -66,14 +63,12 @@
                                 <span class="input-group-text">DueDate</span>
                                 <input type="date" name="dueDate" class="form-control"
                                        value=<c:out value="${dto.dueDate}"></c:out> >
-
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Writer</span>
                                 <input type="text" name="writer" class="form-control"
                                        value=<c:out value="${dto.writer}"></c:out> readonly>
-
                             </div>
 
                             <div class="form-check">
@@ -93,77 +88,62 @@
                         </form>
 
                         <script>
-
                             const serverValidResult = {}
-
                             <c:forEach items="${errors}" var="error">
-
                             serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
-
                             </c:forEach>
-
                             console.log(serverValidResult)
                         </script>
 
                             </div>
                     <script>
-
                         const formObj = document.querySelector("form")
+                        document.querySelector(".btn-danger").addEventListener("click",function(e) {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            formObj.action ="/todo/remove"
+                            formObj.method ="post"
+                            formObj.submit()
+                        },false);
 
-                        // document.querySelector(".btn-danger").addEventListener("click",function(e) {
+                        <%--document.querySelector(".btn-danger").addEventListener("click",function(e) {--%>
+
+                        <%--    e.preventDefault()--%>
+                        <%--    e.stopPropagation()--%>
+
+                        <%--    formObj.action =`/todo/remove?${pageRequestDTO.link}`--%>
+                        <%--    formObj.method ="post"--%>
+
+                        <%--    formObj.submit()--%>
+
+                        <%--},false);--%>
+
+
+                        document.querySelector(".btn-primary").addEventListener("click",function(e) {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            formObj.action ="/todo/modify"
+                            formObj.method ="post"
+                            formObj.submit()
+                        },false);
+
+                        // document.querySelector(".btn-secondary").addEventListener("click",function(e) {
                         //
                         //     e.preventDefault()
                         //     e.stopPropagation()
                         //
-                        //     formObj.action ="/todo/remove"
-                        //     formObj.method ="post"
-                        //
-                        //     formObj.submit()
+                        //     self.location = "/todo/list";
                         //
                         // },false);
 
-                        document.querySelector(".btn-danger").addEventListener("click",function(e) {
+                        <%--document.querySelector(".btn-secondary").addEventListener("click",function(e) {--%>
 
-                            e.preventDefault()
-                            e.stopPropagation()
+                        <%--    e.preventDefault()--%>
+                        <%--    e.stopPropagation()--%>
 
-                            formObj.action =`/todo/remove?${pageRequestDTO.link}`
-                            formObj.method ="post"
+                        <%--    self.location= `/todo/list?${pageRequestDTO.link}`--%>
 
-                            formObj.submit()
-
-                        },false);
-
-
-                        document.querySelector(".btn-primary").addEventListener("click",function(e) {
-
-                            e.preventDefault()
-                            e.stopPropagation()
-
-                            formObj.action ="/todo/modify"
-                            formObj.method ="post"
-
-                            formObj.submit()
-
-                        },false);
-
-                        /*document.querySelector(".btn-secondary").addEventListener("click",function(e) {
-
-                            e.preventDefault()
-                            e.stopPropagation()
-
-                            self.location = "/todo/list";
-
-                        },false);*/
-
-                        document.querySelector(".btn-secondary").addEventListener("click",function(e) {
-
-                            e.preventDefault()
-                            e.stopPropagation()
-
-                            self.location= `/todo/list?${pageRequestDTO.link}`
-
-                        },false);
+                        <%--},false);--%>
 
 
                     </script>

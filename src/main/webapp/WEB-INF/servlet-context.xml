@@ -27,7 +27,8 @@
         <property name="formatters">
             <set>
                 <bean class="net.ict.springex.controller.formatter.LocalDateFormatter"></bean>
-            </set>
+                <bean class="net.ict.springex.controller.formatter.CheckboxFormatter"/>
+           </set>
         </property>
     </bean>
     <mvc:annotation-driven conversion-service="conversionService" /> <!--애너테이션 등록하는 태그-->

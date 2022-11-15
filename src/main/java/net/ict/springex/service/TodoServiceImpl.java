@@ -29,7 +29,7 @@ public class TodoServiceImpl implements TodoService{
         todoMapper.insert(todoVO); // 기능 구현
     }
 
-    // List<TodoVO>를 List<TodoDTO>로 변환하는 작업을 stream을 이용하여
+    // List<TodoVO>를 List<TodoDTO>로 변환하는 작업을 stream을 이용하여 / stream()는 읽기전용 병렬처리 일회용 메소드
     // 각 TodoVO는 map()을 통해서 TodoDTO로 바꾸고 collect()를 이용하여 List<TodoDTO>로 묶어준다
     @Override
     public List<TodoDTO> getAll() {
@@ -38,4 +38,23 @@ public class TodoServiceImpl implements TodoService{
                 .collect(Collectors.toList());
         return dtoList;
     }
+
+    @Override
+    public TodoDTO getOne(Long tno){
+        TodoVO todoVO = todoMapper.selectOne(tno);
+        TodoDTO todoDTO = modelMapper.map(todoVO, TodoDTO.class);
+        return todoDTO;
+    }
+
+    @Override
+    public void remove(Long tno){
+        todoMapper.delete(tno);
+    }
+
+    @Override
+    public void modify(TodoDTO todoDTO) {
+        TodoVO todoVO = modelMapper.map(todoDTO,TodoVO.class);
+        todoMapper.update(todoVO);
+    }
+
 }
