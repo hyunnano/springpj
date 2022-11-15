@@ -36,5 +36,18 @@
         <url-pattern>/</url-pattern> <!--모든 경로의 요청을 다 받기 위해서 / 를 입력해줌-->
     </servlet-mapping>
 
+    <!--  UTF-8 필터 처리  -->
+    <filter>
+        <filter-name>encoding</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value> <!--소문자로 하면 안됨-->
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encoding</filter-name>
+        <servlet-name>appServlet</servlet-name>
+    </filter-mapping>
 
     </web-app>

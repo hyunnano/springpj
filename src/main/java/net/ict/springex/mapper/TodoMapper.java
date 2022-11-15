@@ -4,7 +4,11 @@ package net.ict.springex.mapper;
 
 import net.ict.springex.domain.TodoVO;
 
+
+import java.util.List;
+
 public interface TodoMapper {
     String getTime();
     void insert(TodoVO todoVO); // insert 기능(스펙) 추가, TodoVO 타입으로 todoVO 파라미터값을 받는다
+    List<TodoVO> selectAll(); // List 기능 추가
 }
