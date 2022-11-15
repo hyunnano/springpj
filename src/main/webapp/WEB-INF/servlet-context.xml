@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 스프링MVC설정을 애너테이션 기반으로 처리 및 스프링MVC의 여러 객체들을 자동으로 스프링 Bean으로 등록 하는 기능  -->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!-- 이미지나 html과 같은 정적파일의 경로를 설정(지정)하는 기능 -->
+    <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
+
+    <!--  spring-core와 달리 웹과 관련된 처리를 분리하기 위해서 작성하는 설정파일  -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--  Formatter를 이용한 커스텀 처리를 위해  -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set>
+                <bean class="net.ict.springex.controller.formatter.LocalDateFormatter"></bean>
+            </set>
+        </property>
+    </bean>
+    <mvc:annotation-driven conversion-service="conversionService" /> <!--애너테이션 등록하는 태그-->
+
+    <!--  SampleController에 만들어 놓은걸 빈으로 등록하기 위해서  -->
+    <context:component-scan base-package="net.ict.springex.controller"></context:component-scan>
+
+</beans>
