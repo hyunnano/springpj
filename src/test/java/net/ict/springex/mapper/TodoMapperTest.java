@@ -66,10 +66,22 @@ public class TodoMapperTest {
         PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
         log.info(responseDTO);
         responseDTO.getDtoList().stream().forEach(todoDTO -> log.info(todoDTO));
-
-
-
     }
 
+    @Test
+    public void testSelectSearch(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .types(new String[]{"t","w"})
+                .keyword("Test")
+                .finished(false)
+                .from(LocalDate.of(2022,11,11))
+                .to(LocalDate.of(2022,11,16))
+                .build();
+        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        voList.forEach(vo -> log.info(vo));
+        log.info(todoMapper.getCount(pageRequestDTO));
+    }
 
 }
